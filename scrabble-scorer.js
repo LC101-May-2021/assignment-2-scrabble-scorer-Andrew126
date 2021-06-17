@@ -118,7 +118,6 @@ function runProgram() {
     const text = initialPrompt();
     const info = scorerPrompt();
     newPointStructure = transform(oldPointStructure);
-    console.log(newPointStructure);
     console.log(scoringAlgorithms[info].scoringFunction(text));
 }
 
