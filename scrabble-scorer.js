@@ -45,19 +45,19 @@ function simpleScorer(word) {
   return `Score for ${word.toLowerCase()}: '${simpleScore}' points!`;
 }
 
-let vowelBonusScore = 0;
+let vowelBonusPoints = 0;
 let vowels = ["A","E","I","O","U"];
 
-function vowelBonusScorer(word) {
+function vowelBonusScore(word) {
   word = word.toUpperCase();
   for (let i=0; i<word.length; i++) {
     if (vowels.includes(word[i])) {
-    vowelBonusScore += 3;
+    vowelBonusPoints += 3;
     } else {
-    vowelBonusScore += 1;
+    vowelBonusPoints += 1;
     }
   }
-  return `Score for ${word.toLowerCase()}: '${vowelBonusScore}' points!`;
+  return `Score for ${word.toLowerCase()}: '${vowelBonusPoints}' points!`;
 }
 
 let scrabbleScoreNumber = 0;
@@ -81,7 +81,7 @@ const simpleScoreObj = {
 const bonusVowelsObj = {
   name : "Bonus Vowels",
   description : "Vowels are 3 pts, consonants are 1 pt.",
-  scoringFunction : vowelBonusScorer
+  scoringFunction : vowelBonusScore
 };
 const newScrabbleObj = {
   name : "Scrabble",
