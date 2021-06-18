@@ -41,10 +41,10 @@ function simpleScore(word) {
   return word.length;
 }
 
-let vowelBonusPoints = 0;
-let vowels = ["A","E","I","O","U"];
 
 function vowelBonusScore(word) {
+  let vowelBonusPoints = 0;
+  let vowels = ["A","E","I","O","U"];
   word = word.toUpperCase();
   for (let i=0; i<word.length; i++) {
     if (vowels.includes(word[i])) {
@@ -56,18 +56,17 @@ function vowelBonusScore(word) {
   return vowelBonusPoints;
 }
 
-let scrabbleScoreNumber = 0;
 
-function scrabbleScore(word) {
+
+function scrabbleScore(word, structure) {
+  let scrabbleScoreNumber = 0;
   for (let i=0; i<word.length; i++) {
-    for (letterKeys in newPointStructure) {
-      if (word[i] === letterKeys) {
-        scrabbleScoreNumber += newPointStructure[letterKeys];
-      }
-    }
+    scrabbleScoreNumber += structure[word[i].toLowerCase()];
   }
   return scrabbleScoreNumber;
 }
+
+
 
 const simpleScoreObj = {
   name : "Simple Score",
@@ -87,6 +86,9 @@ const newScrabbleObj = {
 
 let scoringAlgorithms = [ simpleScoreObj, bonusVowelsObj, newScrabbleObj ]; 
 
+
+
+
 function scorerPrompt() {
   console.log("Which scoring algorithm would you like to use?\n");
   console.log("0 - Simple: One point per character");
@@ -99,35 +101,36 @@ function scorerPrompt() {
   return promptNumber;
 };
 
-let newPointStructure = {};
-
 function transform(oldObject) {
-  for (numberValue in oldObject) {
-    for (let letters of oldObject[numberValue]) {
-      newPointStructure[letters.toLowerCase()] = Number(numberValue)
+  let newPointStructure = {};
+  for (let numberValue in oldObject) {
+    let letters = oldObject[numberValue];
+    for (let i=0; i<letters.length; i++) {
+      newPointStructure[letters[i].toLowerCase()] = Number(numberValue);
     }
   }
   return newPointStructure;
 };
 
+let newPointStructure = transform(oldPointStructure);
+
 function runProgram() {
     const text = initialPrompt();
     const info = scorerPrompt();
-    newPointStructure = transform(oldPointStructure);
-    console.log(scoringAlgorithms[info].scoringFunction(text));
+    console.log(scoringAlgorithms[info].scoringFunction(text, newPointStructure));
 }
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
 module.exports = {
-   initialPrompt: initialPrompt,
-   transform: transform,
-   oldPointStructure: oldPointStructure,
-   simpleScore: simpleScore,
-   vowelBonusScore: vowelBonusScore,
-   scrabbleScore: scrabbleScore,
-   scoringAlgorithms: scoringAlgorithms,
-   newPointStructure: newPointStructure,
+  initialPrompt: initialPrompt,
+  transform: transform,
+  oldPointStructure: oldPointStructure,
+  simpleScore: simpleScore,
+  vowelBonusScore: vowelBonusScore,
+  scrabbleScore: scrabbleScore,
+  scoringAlgorithms: scoringAlgorithms,
+  newPointStructure: newPointStructure,
 	runProgram: runProgram,
 	scorerPrompt: scorerPrompt
 };
