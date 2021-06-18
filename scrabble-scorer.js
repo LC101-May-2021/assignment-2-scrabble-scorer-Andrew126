@@ -56,8 +56,6 @@ function vowelBonusScore(word) {
   return vowelBonusPoints;
 }
 
-
-
 function scrabbleScore(word, structure) {
   let scrabbleScoreNumber = 0;
   for (let i=0; i<word.length; i++) {
@@ -65,8 +63,6 @@ function scrabbleScore(word, structure) {
   }
   return scrabbleScoreNumber;
 }
-
-
 
 const simpleScoreObj = {
   name : "Simple Score",
@@ -85,9 +81,6 @@ const newScrabbleObj = {
 };
 
 let scoringAlgorithms = [ simpleScoreObj, bonusVowelsObj, newScrabbleObj ]; 
-
-
-
 
 function scorerPrompt() {
   console.log("Which scoring algorithm would you like to use?\n");
