@@ -37,12 +37,8 @@ function initialPrompt() {
   return input.question("Enter a word to score:");
 };
 
-let simpleScore = 0;
-function simpleScorer(word) {
-  for (let i=0; i<word.length; i++) {
-    simpleScore += 1;
-  }
-  return `Score for ${word.toLowerCase()}: '${simpleScore}' points!`;
+function simpleScore(word) {
+  return word.length;
 }
 
 let vowelBonusPoints = 0;
@@ -57,7 +53,7 @@ function vowelBonusScore(word) {
     vowelBonusPoints += 1;
     }
   }
-  return `Score for ${word.toLowerCase()}: '${vowelBonusPoints}' points!`;
+  return vowelBonusPoints;
 }
 
 let scrabbleScoreNumber = 0;
@@ -70,13 +66,13 @@ function scrabbleScore(word) {
       }
     }
   }
-  return `Using the New Scrabble Algorithm you get ${scrabbleScoreNumber} points!`;
+  return scrabbleScoreNumber;
 }
 
 const simpleScoreObj = {
   name : "Simple Score",
   description : "Each letter is worth 1 point",
-  scoringFunction : simpleScorer
+  scoringFunction : simpleScore
 };
 const bonusVowelsObj = {
   name : "Bonus Vowels",
